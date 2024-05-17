@@ -38,13 +38,16 @@
     .error {
       background-color: lightcoral;
     }
+    .quote {
+      background: lightslategrey;
+    }
   </style>
 
   <script>
 
     // Код писать здесь
   
-    
+    // изначальные данные для создания массива комментариев
 
     const comments = [{
       name : "Глеб Фокин",
@@ -65,7 +68,7 @@
     const text = document.querySelector(".add-form-text");
     const list = document.querySelector(".comments");
 
-
+    // работа счетчиков кликов
     const initLikesListeners = () => {
       const likeButtonsElements = document.querySelectorAll(".like-button");
 
@@ -89,6 +92,12 @@
       }
     }  
 
+    // защита строки от ввода тегов
+    const sanitizeHtml = (htmlString) => {
+      return htmlString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "quot;");
+    }; 
+
+    // создаем или обновляем основной массив комментариев
     const renderComments = () => {
       list.innerHTML = comments.map((comment, index) => {
         return `
@@ -100,7 +109,7 @@
           <div class="comment-body">
             <div class="comment-text">
               ${comment.text
-              .replaceAll("%BEGIN_QUOTE", "div class='quote'>")
+              .replaceAll("%BEGIN_QUOTE", "<div class='quote'>")
               .replaceAll("END_QUOTE%", "</div>")}
             </div>
           </div>
@@ -117,14 +126,29 @@
          
       }).join("");
 
+        
       initLikesListeners ();
       console.log(comments);
+
+      // Очищаем поля ввода от прошлых вводов
+      name.value = "";
+      text.value = "";
+
+
+      // блок для создания цитаты в комментариях
+      for (const comment of document.querySelectorAll(".comment")) {
+        comment.addEventListener("click", () => {
+          const quoteText = comments[comment.dataset.index];
+          text.value = `%BEGIN_QUOTE > ${quoteText.text}END_QUOTE% ${quoteText.name},`
+        });
+      }
+
     }
     
     renderComments();
     
     
-    
+    // проверяем и подсвечиваем пустые поля, после добавляем в массив
     const addButton = document.querySelector(".add-form-button");
     addButton.addEventListener("click", () => {
       name.classList.remove("error");
@@ -142,23 +166,21 @@
       } else {      
 
       comments.push({
-        name: name.value,
-        text: text.value,
+        // добавляем защиту строки от ввода тегов
+        name: sanitizeHtml(name.value),
+        text: sanitizeHtml(text.value),
         date: new Date(),
         likes: 0,
         isLiked: false,
       });
       renderComments ()
-    }
+     
+       }
     
-      renderComments();
-      
-
-      name.value = "";
-      text.value = "";
+      renderComments(); 
+    
     });
-
-
+    
     console.log("It works!");
   </script>
 </html>
