@@ -30,7 +30,9 @@
           <button class="add-form-button" onclick="postComment()">Написать</button>
         </div>
       </div>
-      <div class="loaderPost"> Коментарий добавляется...</div>
+      <div class="loaderPost"> 
+        <br> Коментарий добавляется...
+      </div>
     </div>
   </body>
 
@@ -49,6 +51,7 @@
     .invisible {
       display: none;
     }
+      
   </style>
 
   <script>
@@ -179,7 +182,7 @@
       for (let likeButtonElement of likeButtonsElements) {
         likeButtonElement.addEventListener("click", (event) =>{
           event.stopPropagation();
-
+          
           const index = likeButtonElement.dataset.index
 
           const comment = comments[index];
