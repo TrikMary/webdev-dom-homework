@@ -26,6 +26,7 @@
           rows="4"
         ></textarea>
         <div class="add-form-row">
+          <!-- Привязала клик для отправки даннх на сервер к кнопке -->
           <button class="add-form-button" onclick="postComment()">Написать</button>
         </div>
       </div>
@@ -69,12 +70,12 @@
     const name = document.querySelector(".add-form-name");
     const text = document.querySelector(".add-form-text");
     const list = document.querySelector(".comments");
+    
 
     // защита строки от ввода тегов
     const sanitizeHtml = (htmlString) => {
       return htmlString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "quot;");
     }; 
-
 
         // Запросы в API - ассинхронные, мы не знаем как долго будет выполняться
     // запрос может выполняться (секунды, и даже минуты)
@@ -82,18 +83,22 @@
     // fetch - запускает выполнение запроса к api
     
     
+      // *** создаем функцию получения данных с сервера ***
 
-     const getComment = () => {fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments",
+     const getComment = () => {
+      return fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments",
       {
         method: "GET",
       })
       // подписываемся на успешное завершение запроса с помощью then
       .then((response) => {
         // Преобразовываем "сырые" данные от API в json формат
-        response.json()
+       return response.json()
+      })
         //Подписываемся на результат преобразования
         .then((responseData) => {
           console.log(responseData);
+
           //Преобразовываем данные из формата api в формат приложения
           const appComments = responseData.comments.map((comment) => {
             return {
@@ -109,31 +114,46 @@
           // получили данные и рендерим их в приложении
           comments = appComments;
           console.log(appComments);
+          
           renderComments();
         });
-      });
+      
      }
-     getComment();
+     getComment ();
     
-      // отправка комментария на сервер 
+
+
+      // отправка комментариев на сервер, активируется по нажатию кнопки Написать,
+      // клик привязан к кнопке в разметке html
     
       const postComment = () => {
-        fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments", {
-        method: "POST",
-        body: JSON.stringify({
-          text: sanitizeHtml(text.value), 
-          name: sanitizeHtml(name.value)
-      
-        }),
+        return fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments", {
+          method: "POST",
+          body: JSON.stringify({
+            text: sanitizeHtml(text.value), 
+            name: sanitizeHtml(name.value)
+        
+          })
         // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
-      }).then((response) => {
-        response.json().then((responseData) => {
-          // получили данные и рендерим их в приложении
-          console.log(responseData)
+        })
+        .then((response) => {
           
+        return response.json();
+        })
+        .then((responseData) => {
+          
+          // ответ от сервера
+          console.log(responseData);
+           // Очищаем поля ввода от прошлых вводов
+           name.value = "";
+          text.value = "";
+        }).then(() => {
+          // GET запрос для получения списка комментариев, рендерим их
+          
+          getComment();
         });
-        getComment();
-      });
+        
+      
     }
     
 
@@ -199,10 +219,7 @@
       initLikesListeners ();
       console.log(comments);
 
-      // Очищаем поля ввода от прошлых вводов
-      name.value = "";
-      text.value = "";
-
+      
 
       // блок для создания цитаты в комментариях
       for (const comment of document.querySelectorAll(".comment")) {
