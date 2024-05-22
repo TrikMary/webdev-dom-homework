@@ -8,7 +8,7 @@
 
   <body>
     <div class="container">
-      <div class="loader">Комментарии загружаются...</div>
+      <div class="loaderFirst">Комментарии загружаются...</div>
       <ul class="comments">
          <!-- тут будут сама лента комментариев в массиве, JS пропишем отдельно -->
       </ul>
@@ -30,6 +30,7 @@
           <button class="add-form-button" onclick="postComment()">Написать</button>
         </div>
       </div>
+      <div class="loaderPost"> Коментарий добавляется...</div>
     </div>
   </body>
 
@@ -42,13 +43,16 @@
     .quote {
       background: lightslategrey;
     }
+    .loader {
+      display: none;
+    }
     .invisible {
       display: none;
     }
   </style>
 
   <script>
-
+    document.querySelector(".loaderPost").classList.add("loader");
     // Код писать здесь
   
     // изначальные данные для создания массива комментариев
@@ -116,7 +120,7 @@
           });
           // получили данные и рендерим их в приложении
           comments = appComments;
-          document.querySelector(".loader").classList.add("invisible");
+          document.querySelector(".loaderFirst").classList.add("loader");
           console.log(appComments);
           
           renderComments();
@@ -131,6 +135,9 @@
       // клик привязан к кнопке в разметке html
     
       const postComment = () => {
+        document.querySelector(".loaderPost").classList.remove("loader");
+        document.querySelector(".add-form").classList.add("invisible");
+        console.log("прячемся");
         return fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments", {
           method: "POST",
           body: JSON.stringify({
@@ -145,7 +152,9 @@
         return response.json();
         })
         .then((responseData) => {
-          
+          document.querySelector(".loaderPost").classList.add("loader");
+        document.querySelector(".add-form").classList.remove("invisible");
+        console.log("нашлись");
           // ответ от сервера
           console.log(responseData);
            // Очищаем поля ввода от прошлых вводов
