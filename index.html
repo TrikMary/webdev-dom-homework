@@ -26,7 +26,7 @@
           rows="4"
         ></textarea>
         <div class="add-form-row">
-          <button class="add-form-button">Написать</button>
+          <button class="add-form-button" onclick="postComment()">Написать</button>
         </div>
       </div>
     </div>
@@ -49,24 +49,95 @@
   
     // изначальные данные для создания массива комментариев
 
-    const comments = [{
-      name : "Глеб Фокин",
-      date : new Date("2023-02-01T12:20:52.308Z"),
-      text : "Это будет первый комментарий на этой странице",
-      likes : 3,
-      isLiked : false,
-    }, {
-      name : "Варвара Н.",
-      date : new Date("2023-02-15T19:45:56.308Z"),
-      text : "Мне нравится как оформлена эта страница! ❤",
-      likes : 75,
-      isLiked : true,
-    },];
+    let comments = [
+    //   {
+    //   name : "Глеб Фокин",
+    //   date : new Date("2023-02-01T12:20:52.308Z"),
+    //   text : "Это будет первый комментарий на этой странице",
+    //   likes : 3,
+    //   isLiked : false,
+    // }, {
+    //   name : "Варвара Н.",
+    //   date : new Date("2023-02-15T19:45:56.308Z"),
+    //   text : "Мне нравится как оформлена эта страница! ❤",
+    //   likes : 75,
+    //   isLiked : true,
+    // },
+  ];
 
 
     const name = document.querySelector(".add-form-name");
     const text = document.querySelector(".add-form-text");
     const list = document.querySelector(".comments");
+
+    // защита строки от ввода тегов
+    const sanitizeHtml = (htmlString) => {
+      return htmlString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "quot;");
+    }; 
+
+
+        // Запросы в API - ассинхронные, мы не знаем как долго будет выполняться
+    // запрос может выполняться (секунды, и даже минуты)
+    
+    // fetch - запускает выполнение запроса к api
+    
+    
+
+     const getComment = () => {fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments",
+      {
+        method: "GET",
+      })
+      // подписываемся на успешное завершение запроса с помощью then
+      .then((response) => {
+        // Преобразовываем "сырые" данные от API в json формат
+        response.json()
+        //Подписываемся на результат преобразования
+        .then((responseData) => {
+          console.log(responseData);
+          //Преобразовываем данные из формата api в формат приложения
+          const appComments = responseData.comments.map((comment) => {
+            return {
+              //Достаем имя автора
+              name: comment.author.name,
+              // Преобразовываем дату-строку в Date
+              date: new Date(comment.date),
+              text: comment.text,
+              likes: comment.likes, //пока заглушка
+              isliked: false,
+            };
+          });
+          // получили данные и рендерим их в приложении
+          comments = appComments;
+          console.log(appComments);
+          renderComments();
+        });
+      });
+     }
+     getComment();
+    
+      // отправка комментария на сервер 
+    
+      const postComment = () => {
+        fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments", {
+        method: "POST",
+        body: JSON.stringify({
+          text: sanitizeHtml(text.value), 
+          name: sanitizeHtml(name.value)
+      
+        }),
+        // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
+      }).then((response) => {
+        response.json().then((responseData) => {
+          // получили данные и рендерим их в приложении
+          console.log(responseData)
+          
+        });
+        getComment();
+      });
+    }
+    
+
+    
 
     // работа счетчиков кликов
     const initLikesListeners = () => {
@@ -92,11 +163,7 @@
       }
     }  
 
-    // защита строки от ввода тегов
-    const sanitizeHtml = (htmlString) => {
-      return htmlString.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "quot;");
-    }; 
-
+    
     // создаем или обновляем основной массив комментариев
     const renderComments = () => {
       list.innerHTML = comments.map((comment, index) => {
@@ -109,8 +176,10 @@
           <div class="comment-body">
             <div class="comment-text">
               ${comment.text
-              .replaceAll("%BEGIN_QUOTE", "<div class='quote'>")
-              .replaceAll("END_QUOTE%", "</div>")}
+                // !!!!!!!!! 
+                // строка с цитатой не заменяет знаки - придумать как
+                // .replaceAll("%BEGIN_QUOTE", "<div class='quote'>").replaceAll("END_QUOTE%", "</div>")
+            }
             </div>
           </div>
           <div class="comment-footer">
