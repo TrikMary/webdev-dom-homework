@@ -8,7 +8,7 @@
 
   <body>
     <div class="container">
-
+      <div class="loader">Комментарии загружаются...</div>
       <ul class="comments">
          <!-- тут будут сама лента комментариев в массиве, JS пропишем отдельно -->
       </ul>
@@ -41,6 +41,9 @@
     }
     .quote {
       background: lightslategrey;
+    }
+    .invisible {
+      display: none;
     }
   </style>
 
@@ -113,6 +116,7 @@
           });
           // получили данные и рендерим их в приложении
           comments = appComments;
+          document.querySelector(".loader").classList.add("invisible");
           console.log(appComments);
           
           renderComments();
