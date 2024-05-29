@@ -26,7 +26,7 @@
           rows="4"
         ></textarea>
         <div class="add-form-row">
-          <!-- Привязала клик для отправки даннх на сервер к кнопке -->
+          <!-- Привязала клик для отправки данных на сервер к кнопке -->
           <button class="add-form-button" onclick="postComment()">Написать</button>
         </div>
       </div>
@@ -56,6 +56,7 @@
 
   <script>
     document.querySelector(".loaderPost").classList.add("loader");
+    
     // Код писать здесь
   
     // изначальные данные для создания массива комментариев
@@ -76,7 +77,7 @@
     // },
   ];
 
-
+    const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
     const name = document.querySelector(".add-form-name");
     const text = document.querySelector(".add-form-text");
     const list = document.querySelector(".comments");
@@ -96,7 +97,7 @@
       // *** создаем функцию получения данных с сервера ***
 
      const getComment = () => {
-      return fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments",
+      return fetch(baseApiUrl,
       {
         method: "GET",
       })
@@ -141,7 +142,7 @@
         document.querySelector(".loaderPost").classList.remove("loader");
         document.querySelector(".add-form").classList.add("invisible");
         console.log("прячемся");
-        return fetch("https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments", {
+        return fetch(baseApiUrl, {
           method: "POST",
           body: JSON.stringify({
             text: sanitizeHtml(text.value), 
