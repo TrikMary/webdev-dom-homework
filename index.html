@@ -142,6 +142,8 @@
             alert ("Сервер сломался");
             return;
           }
+          alert ("Хм, что-то пошло не так...");
+          console.log(error);
         })
       
     }
@@ -160,7 +162,8 @@
           body: JSON.stringify({
             text: sanitizeHtml(text.value), 
             name: sanitizeHtml(name.value),
-            forceError: true,
+            // включение 500й ошибки
+            // forceError: true,
           })
         // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
         })
@@ -194,6 +197,8 @@
             alert ("Сервер временно не работает");
             return;
           }
+          alert ("Хм, что-то пошло не так...");
+          console.log(error);
         });
         
       
