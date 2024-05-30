@@ -105,9 +105,13 @@
       return fetch(baseApiUrl,
       {
         method: "GET",
+
       })
       // подписываемся на успешное завершение запроса с помощью then
       .then((response) => {
+        if (response.status === 500) {
+          throw new Error ("500я проблема сервера")
+        }
         // Преобразовываем "сырые" данные от API в json формат
        return response.json()
       })
@@ -133,7 +137,12 @@
           console.log(appComments);
           
           renderComments();
-        });
+        }).catch((error) => {
+          if (error.message === "500я проблема сервера") {
+            alert ("Сервер сломался");
+            return;
+          }
+        })
       
     }
      getComment ();
@@ -150,14 +159,17 @@
           method: "POST",
           body: JSON.stringify({
             text: sanitizeHtml(text.value), 
-            name: sanitizeHtml(name.value)
-        
+            name: sanitizeHtml(name.value),
+            forceError: true,
           })
         // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
         })
         .then((response) => {
           if (response.status === 400) {
             throw new Error ("400я проблема с полями")
+          } 
+          if (response.status === 500) {
+            throw new Error ("500я проблема с сервером")
           }
           return response.json();
         })
@@ -175,7 +187,11 @@
         }).catch((error) => {
           showInputForm();
           if (error.message === "400я проблема с полями") {
-            alert("Некоректно заполнены поля ввода");
+            alert ("Некоректно заполнены поля ввода");
+            return;
+          }
+          if (error.message === "500я проблема с сервером") {
+            alert ("Сервер временно не работает");
             return;
           }
         });
