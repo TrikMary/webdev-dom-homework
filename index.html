@@ -26,8 +26,7 @@
           rows="4"
         ></textarea>
         <div class="add-form-row">
-          <!-- Привязала клик для отправки данных на сервер к кнопке -->
-          <button class="add-form-button" onclick="postComment()">Написать</button>
+          <button class="add-form-button" >Написать</button>
         </div>
       </div>
       <div class="loaderPost"> 
@@ -75,12 +74,18 @@
     //   likes : 75,
     //   isLiked : true,
     // },
-  ];
+    ];
 
     const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
     const name = document.querySelector(".add-form-name");
     const text = document.querySelector(".add-form-text");
     const list = document.querySelector(".comments");
+
+    function showInputForm () {
+      document.querySelector(".loaderPost").classList.add("loader");
+      document.querySelector(".add-form").classList.remove("invisible");
+      console.log("нашлись");
+    }
     
 
     // защита строки от ввода тегов
@@ -96,7 +101,7 @@
     
       // *** создаем функцию получения данных с сервера ***
 
-     const getComment = () => {
+    const getComment = () => {
       return fetch(baseApiUrl,
       {
         method: "GET",
@@ -130,13 +135,12 @@
           renderComments();
         });
       
-     }
+    }
      getComment ();
     
 
 
-      // отправка комментариев на сервер, активируется по нажатию кнопки Написать,
-      // клик привязан к кнопке в разметке html
+    // отправка комментариев на сервер
     
       const postComment = () => {
         document.querySelector(".loaderPost").classList.remove("loader");
@@ -152,26 +156,32 @@
         // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
         })
         .then((response) => {
-          
-        return response.json();
+          if (response.status === 400) {
+            throw new Error ("400я проблема с полями")
+          }
+          return response.json();
         })
         .then((responseData) => {
-          document.querySelector(".loaderPost").classList.add("loader");
-        document.querySelector(".add-form").classList.remove("invisible");
-        console.log("нашлись");
+          showInputForm();
           // ответ от сервера
           console.log(responseData);
            // Очищаем поля ввода от прошлых вводов
-           name.value = "";
+          name.value = "";
           text.value = "";
         }).then(() => {
           // GET запрос для получения списка комментариев, рендерим их
           
           getComment();
+        }).catch((error) => {
+          showInputForm();
+          if (error.message === "400я проблема с полями") {
+            alert("Некоректно заполнены поля ввода");
+            return;
+          }
         });
         
       
-    }
+      }
     
 
     
@@ -248,12 +258,14 @@
 
     }
     
-    renderComments();
+    // renderComments();
     
     
     // проверяем и подсвечиваем пустые поля, после добавляем в массив
     const addButton = document.querySelector(".add-form-button");
+
     addButton.addEventListener("click", () => {
+      // наша проверка полей ввода
       name.classList.remove("error");
       text.classList.remove("error");
       if (!name.value && !text.value) {
@@ -267,21 +279,9 @@
         text.classList.add("error");
         return;
       } else {      
-
-      comments.push({
-        // добавляем защиту строки от ввода тегов
-        name: sanitizeHtml(name.value),
-        text: sanitizeHtml(text.value),
-        date: new Date(),
-        likes: 0,
-        isLiked: false,
-      });
-      renderComments ()
-     
-       }
-    
-      renderComments(); 
-    
+        postComment();
+      }
+       
     });
     
     console.log("It works!");
