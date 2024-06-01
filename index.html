@@ -142,8 +142,6 @@
             alert ("Сервер сломался");
             return;
           }
-          alert ("Хм, что-то пошло не так...");
-          console.log(error);
         })
       
     }
@@ -167,6 +165,7 @@
           })
         // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
         })
+        .finally (() => showInputForm())
         .then((response) => {
           if (response.status === 400) {
             throw new Error ("400я проблема с полями")
@@ -177,7 +176,8 @@
           return response.json();
         })
         .then((responseData) => {
-          showInputForm();
+         // пока прячем, вынесла в finally
+          // showInputForm();
           // ответ от сервера
           console.log(responseData);
            // Очищаем поля ввода от прошлых вводов
@@ -188,7 +188,8 @@
           
           getComment();
         }).catch((error) => {
-          showInputForm();
+          // пока прячем, вынесла в finally
+          //  showInputForm();
           if (error.message === "400я проблема с полями") {
             alert ("Некоректно заполнены поля ввода");
             return;
@@ -196,9 +197,9 @@
           if (error.message === "500я проблема с сервером") {
             alert ("Сервер временно не работает");
             return;
-          }
+          } 
           alert ("Хм, что-то пошло не так...");
-          console.log(error);
+          
         });
         
       
@@ -289,14 +290,14 @@
       // наша проверка полей ввода
       name.classList.remove("error");
       text.classList.remove("error");
-      if (!name.value && !text.value) {
+      if (!name.value.trim() && !text.value.trim()) {
         name.classList.add("error");
         text.classList.add("error");
         return;
-      } else if (!name.value) {
+      } else if (!name.value.trim()) {
         name.classList.add("error");
         return;
-      } else if (!text.value) {
+      } else if (!text.value.trim()) {
         text.classList.add("error");
         return;
       } else {      
