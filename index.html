@@ -32,6 +32,7 @@
       <div class="loaderPost"> 
         <br> Коментарий добавляется...
       </div>
+      
     </div>
   </body>
 
@@ -55,6 +56,7 @@
 
   <script>
     document.querySelector(".loaderPost").classList.add("loader");
+    
     
     // Код писать здесь
   
@@ -82,8 +84,8 @@
     const list = document.querySelector(".comments");
 
     function showInputForm () {
-      document.querySelector(".loaderPost").classList.add("loader");
-      document.querySelector(".add-form").classList.remove("invisible");
+      document.querySelector(".loaderPost").classList.add("loader"); // спрятать текст
+      document.querySelector(".add-form").classList.remove("invisible"); // показать форму
       console.log("нашлись");
     }
     
@@ -111,6 +113,7 @@
       .then((response) => {
         if (response.status === 500) {
           throw new Error ("500я проблема сервера")
+          
         }
         // Преобразовываем "сырые" данные от API в json формат
        return response.json()
@@ -140,7 +143,10 @@
         }).catch((error) => {
           if (error.message === "500я проблема сервера") {
             alert ("Сервер сломался");
+           
             return;
+          } else {
+            document.querySelector(".loaderFirst").textContent = "Комментарии не загрузились..."
           }
         })
       
@@ -161,12 +167,13 @@
             text: sanitizeHtml(text.value), 
             name: sanitizeHtml(name.value),
             // включение 500й ошибки
-            // forceError: true,
+            forceError: true,
           })
         // а в теле строка "text": "Текст коммента", "name": "Глеб Ф."
         })
-        .finally (() => showInputForm())
+       
         .then((response) => {
+          
           if (response.status === 400) {
             throw new Error ("400я проблема с полями")
           } 
@@ -187,9 +194,12 @@
           // GET запрос для получения списка комментариев, рендерим их
           
           getComment();
-        }).catch((error) => {
+        })
+        
+        .catch((error) => {
           // пока прячем, вынесла в finally
           //  showInputForm();
+          
           if (error.message === "400я проблема с полями") {
             alert ("Некоректно заполнены поля ввода");
             return;
@@ -200,7 +210,8 @@
           } 
           alert ("Хм, что-то пошло не так...");
           
-        });
+        })
+        .finally (() => showInputForm());
         
       
       }
