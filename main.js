@@ -2,8 +2,8 @@ import { getCommentFetch, postCommentFetch } from "./api.js";
 import { checkInputValue } from "./checkInputValue.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
 import { renderComments } from "./renderComments.js";
-
-
+import { showInputForm } from "./visibleInputForm.js";
+import { hideInputForm } from "./visibleInputForm.js";
 
 
 document.querySelector(".loaderPost").classList.add("loader");
@@ -16,17 +16,6 @@ const name = document.querySelector(".add-form-name");
 export const text = document.querySelector(".add-form-text");
 export const list = document.querySelector(".comments");
 
-function showInputForm () {
-  document.querySelector(".loaderPost").classList.add("loader"); // спрятать текст
-  document.querySelector(".add-form").classList.remove("invisible"); // показать форму
-  console.log("нашлись");
-}
-
-function hideInputForm () {
-    document.querySelector(".loaderPost").classList.remove("loader");
-    document.querySelector(".add-form").classList.add("invisible");
-    console.log("прячемся");
-}
 
 const getComment = () => {
 
