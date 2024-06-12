@@ -1,8 +1,7 @@
 import { getCommentFetch, postCommentFetch } from "./api.js";
 import { checkInputValue } from "./checkInputValue.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
-import { initLikesListeners } from "./initLikesListeners.js";
-import { quote } from "./quoteComment.js";
+import { renderComments } from "./renderComments.js";
 
 
 
@@ -15,7 +14,7 @@ export let comments = [];
 const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
 const name = document.querySelector(".add-form-name");
 export const text = document.querySelector(".add-form-text");
-const list = document.querySelector(".comments");
+export const list = document.querySelector(".comments");
 
 function showInputForm () {
   document.querySelector(".loaderPost").classList.add("loader"); // спрятать текст
@@ -28,9 +27,6 @@ function hideInputForm () {
     document.querySelector(".add-form").classList.add("invisible");
     console.log("прячемся");
 }
-
-
-// *** создаем функцию получения данных с сервера ***
 
 const getComment = () => {
 
@@ -94,41 +90,6 @@ const postComment = () => {
         
     })
     .finally (() => showInputForm());
-    
-
-}
-
-// создаем или обновляем основной массив комментариев
-const renderComments = () => {
-  list.innerHTML = comments.map((comment, index) => {
-    return `
-    <li class="comment" data-index="${index}">
-      <div class="comment-header">
-        <div>${comment.name}</div>
-        <div>${comment.date.toLocaleDateString()} ${comment.date.toLocaleTimeString()}</div>
-      </div>
-      <div class="comment-body">
-        <div class="comment-text">
-          ${comment.text}
-        </div>
-      </div>
-      <div class="comment-footer">
-        <div class="likes">
-          <span class="likes-counter">${comment.likes}</span>лайка
-          <button data-index="${index}" class="like-button ${
-            comment.isLiked ? "-active-like" : ""
-        }"></button>
-          </div>
-        </div>
-      </li>
-    `   
-      
-  }).join("");
-
-    
-  initLikesListeners ({renderComments, comments});
-
-  quote ();
 
 }
 

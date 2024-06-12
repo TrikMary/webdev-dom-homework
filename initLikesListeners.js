@@ -1,6 +1,7 @@
+import { comments } from "./main.js";
+import { renderComments } from "./renderComments.js";
 
-
-export function initLikesListeners ({renderComments, comments}) {
+export function initLikesListeners () {
     const likeButtonsElements = document.querySelectorAll(".like-button");
 
     for (let likeButtonElement of likeButtonsElements) {
