@@ -1,7 +1,7 @@
 import { comments } from "./main.js";
 import { text } from "./main.js";
 
-export function quote () {
+export function initQuoteListener () {
     for (const comment of document.querySelectorAll(".comment")) {
       comment.addEventListener("click", () => {
         const quoteText = comments[comment.dataset.index];

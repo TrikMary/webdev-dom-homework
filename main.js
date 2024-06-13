@@ -1,9 +1,7 @@
 import { getCommentFetch, postCommentFetch } from "./api.js";
 import { checkInputValue } from "./checkInputValue.js";
-import { sanitizeHtml } from "./sanitizeHtml.js";
 import { renderComments } from "./renderComments.js";
-import { showInputForm } from "./visibleInputForm.js";
-import { hideInputForm } from "./visibleInputForm.js";
+import { postComment } from "./postComment.js";
 
 
 document.querySelector(".loaderPost").classList.add("loader");
@@ -12,29 +10,28 @@ document.querySelector(".loaderPost").classList.add("loader");
 export let comments = [];
 
 const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
-const name = document.querySelector(".add-form-name");
+export const name = document.querySelector(".add-form-name");
 export const text = document.querySelector(".add-form-text");
 export const list = document.querySelector(".comments");
 
 
-const getComment = () => {
+export const getComment = () => {
 
   getCommentFetch().then((responseData) => {
     
     const appComments = responseData.comments.map((comment) => {
       return {
-        name: comment.author.name,
-        date: new Date(comment.date),
-        text: comment.text,
-        likes: comment.likes, //пока заглушка
-        isliked: false,
-      };
+          name: comment.author.name,
+          date: new Date(comment.date),
+          text: comment.text,
+          likes: comment.likes,
+          isLiked: comment.isLiked,
+      }
     });
-    // получили данные и рендерим их в приложении
+
     comments = appComments;
     document.querySelector(".loaderFirst").classList.add("loader");
-    console.log(appComments);
-      
+          
     renderComments();
 
   }).catch((error) => {
@@ -50,39 +47,7 @@ const getComment = () => {
 
 getComment ();
 
-const postComment = () => {
-    hideInputForm();
-    
-    postCommentFetch ( {
-        text: sanitizeHtml(text.value), 
-        name: sanitizeHtml(name.value),
-    }).then((responseData) => {
-        // Очищаем поля ввода от прошлых вводов
-        name.value = "";
-        text.value = "";
-    }).then(() => {
-                
-        getComment();
-    })
-    
-    .catch((error) => {
-                
-        if (error.message === "400я проблема с полями") {
-        alert ("Некоректно заполнены поля ввода");
-        return;
-        }
-        if (error.message === "500я проблема с сервером") {
-        alert ("Сервер временно не работает");
-        return;
-        } 
-        alert ("Хм, что-то пошло не так...");
-        
-    })
-    .finally (() => showInputForm());
 
-}
-
-// проверяем и подсвечиваем пустые поля, после добавляем в массив
 const addButton = document.querySelector(".add-form-button");
 
 addButton.addEventListener("click", () => {

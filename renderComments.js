@@ -1,5 +1,5 @@
 import { initLikesListeners } from "./initLikesListeners.js";
-import { quote } from "./quoteComment.js";
+import { initQuoteListener } from "./initQuoteListener.js";
 import { comments } from "./main.js";
 import { list } from "./main.js";
 
@@ -34,6 +34,6 @@ export const renderComments = () => {
       
     initLikesListeners ();
   
-    quote ();
+    initQuoteListener ();
   
   }

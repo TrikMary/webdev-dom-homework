@@ -1,6 +1,6 @@
 
 
-export     function showInputForm () {
+export function showInputForm () {
     document.querySelector(".loaderPost").classList.add("loader"); // спрятать текст
     document.querySelector(".add-form").classList.remove("invisible"); // показать форму
     console.log("нашлись");
