@@ -1,4 +1,4 @@
-import { getCommentFetch, postCommentFetch } from "./api.js";
+import { getCommentFetch } from "./api.js";
 import { checkInputValue } from "./checkInputValue.js";
 import { renderComments } from "./renderComments.js";
 import { postComment } from "./postComment.js";
@@ -9,7 +9,6 @@ document.querySelector(".loaderPost").classList.add("loader");
 
 export let comments = [];
 
-const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
 export const name = document.querySelector(".add-form-name");
 export const text = document.querySelector(".add-form-text");
 export const list = document.querySelector(".comments");
