@@ -22,12 +22,16 @@ export const list = document.querySelector(".comments");
 // первая загрузка формы при ссылке с главной странички
 const showStartFormElement = document.getElementById("show-start-form");
   showStartFormElement.addEventListener("click", () => {
-    document.querySelector(".comments").classList.add("invisible");
+    hideComments ();
     showLoginForm();
   })
 
-
-
+export function hideComments () {
+  document.querySelector(".comments").classList.add("invisible");
+}
+export function findComments () {
+  document.querySelector(".comments").classList.remove("invisible");
+}
 
 export const getComment = () => {
 
@@ -60,7 +64,7 @@ export const getComment = () => {
 }
 
 getComment ();
-showAddForm();
+// showAddForm();
 
 
 const addButton = document.querySelector(".add-form-button");
@@ -71,47 +75,7 @@ addButton.addEventListener("click", () => {
 
  
 
-export const showRegisterForm = () => {
-  const showRegisterFormElement = document.getElementById("customer-form");
 
-  const registerHtml = `
-  <div class="login-form">
-  <h1>Форма ввода </h1>
-  <input
-    type="text"
-    class="login-form-input login-form-login"
-    placeholder="Введите логин"
-  />
-
-  <input
-    type="text"
-    class="login-form-input register-form-name"
-    placeholder="Введите имя"
-  />
-
-  <input
-    type="text"
-    class="login-form-input login-form-password"
-    placeholder="Введите пароль"
-  />
-            
-  <div class="login-form-row">
-   <div>
-        <button class="register-form-button" >Зарегистрироваться</button>
-    </div>
-    <div>
-    <h2 class="change-form-text" id="change-form">Войти</h2> 
-    </div>
-  </div>
-  
-  `;
-  showRegisterFormElement.innerHTML = registerHtml;
-
-  const changeLoginToReg = document.getElementById("change-form");
-    changeLoginToReg.addEventListener("click", () => {
-      showLoginForm();
-    })
-}
 
 
 

@@ -30,6 +30,13 @@ export const renderComments = () => {
       `   
         
     }).join("");
+
+
+    // app.innerHTML = ` 
+    // <ul class="comments">
+    // ${commentsHtml}
+    // </ul>
+    // ${token ? formHtml : authHtml}
   
       
     initLikesListeners ();

@@ -1,9 +1,12 @@
 import { getToken, loginFetch, setUserName, setToken, token, userName } from "./api.js";
-import { showRegisterForm } from "./main.js";
+import { showRegisterForm } from "./showRegisterForm.js"
+import { renderComments } from "./renderComments.js";
+import { findAddForm, showAddForm } from "./showAddForm.js";
+import { findComments, getComment } from "./main.js";
 
 
 // логин форма
-export const showLoginForm = () => {
+export function showLoginForm () {
     const showLoginFormElement = document.getElementById("customer-form");
     
     const loginHtml = `            
@@ -58,9 +61,14 @@ export const showLoginForm = () => {
           console.log(userName);
           setToken(responseData.user.token);
           console.log(token);
-           
-          
+                     
         })
+        .then(() => {
+            
+            findComments();
+            showAddForm();
+            
+        });
     });
    
 }

@@ -1,12 +1,19 @@
+
+
+export const hideAddForm = () => {
+            document.getElementById("add-form").classList.add("invisible")
+}
+export const findAddForm = () => {
+    document.getElementById("add-form").classList.remove("invisible")
+}
 export const showAddForm = () => {
+    
+    const showAddFormElement = document.getElementById("customer-form");
 
-       const showAddFormElement = document.getElementById("add-form");
-
-        document.getElementById("add-form").classList.add("invisible")
-
-
+        
         const addFormHtml = `
-            
+          
+        <div class="add-form" id="add-form" >  
          <input
             type="text"
             class="add-form-name"
@@ -21,14 +28,14 @@ export const showAddForm = () => {
         ></textarea>
         <div class="add-form-row">
             <button class="add-form-button" >Написать</button>
-            </div>
-            </div> 
-        <div class="loaderPost"> 
-            <br> Коментарий добавляется...
-        </div>   
+        </div>        
+        </div>
         `;
 
         showAddFormElement.innerHTML = addFormHtml;
      };
+    //  <div class="loaderPost"> 
+    //         <br> Коментарий добавляется...
+    //     </div> 
 
 
