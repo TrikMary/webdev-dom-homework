@@ -1,3 +1,6 @@
+import { userName } from "./api.js"
+import { postComment } from "./postComment.js"
+import { checkInputValue, shortCheckInputValue } from "./checkInputValue.js"
 
 
 export const hideAddForm = () => {
@@ -6,9 +9,12 @@ export const hideAddForm = () => {
 export const findAddForm = () => {
     document.getElementById("add-form").classList.remove("invisible")
 }
+
 export const showAddForm = () => {
     
+    
     const showAddFormElement = document.getElementById("customer-form");
+
 
         
         const addFormHtml = `
@@ -17,7 +23,7 @@ export const showAddForm = () => {
          <input
             type="text"
             class="add-form-name"
-            placeholder="Введите ваше имя"
+            placeholder=${userName}
             readonly
         />
         <textarea
@@ -28,14 +34,22 @@ export const showAddForm = () => {
         ></textarea>
         <div class="add-form-row">
             <button class="add-form-button" >Написать</button>
-        </div>        
+        </div>    
+        <div class="loaderPost loader"> 
+            <br> Коментарий добавляется...
+        </div>     
         </div>
         `;
 
         showAddFormElement.innerHTML = addFormHtml;
-     };
-    //  <div class="loaderPost"> 
-    //         <br> Коментарий добавляется...
-    //     </div> 
+        
+
+        const text = document.querySelector(".add-form-text");
+        const addButton = document.querySelector(".add-form-button");
+        addButton.addEventListener("click", () => {
+            shortCheckInputValue({text});
+            });
+};
+
 
 

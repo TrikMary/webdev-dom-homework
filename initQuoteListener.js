@@ -1,5 +1,5 @@
 import { comments } from "./main.js";
-import { text } from "./main.js";
+// import { text } from "./showAddForm.js";
 
 export function initQuoteListener () {
     for (const comment of document.querySelectorAll(".comment")) {

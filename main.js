@@ -14,8 +14,8 @@ export let comments = [];
 
 
 
-export const name = document.querySelector(".add-form-name");
-export const text = document.querySelector(".add-form-text");
+// export const name = document.querySelector(".add-form-name");
+// export const text = document.querySelector(".add-form-text");
 export const list = document.querySelector(".comments");
 
 
@@ -64,14 +64,10 @@ export const getComment = () => {
 }
 
 getComment ();
-// showAddForm();
 
 
-const addButton = document.querySelector(".add-form-button");
 
-addButton.addEventListener("click", () => {
-    checkInputValue({name, text, postComment})
-});
+
 
  
 
