@@ -1,8 +1,8 @@
-import { getToken, loginFetch, setUserName, setToken, token, userName } from "./api.js";
+import { loginFetch, setUserName, setToken, token, userName } from "./api.js";
 import { showRegisterForm } from "./showRegisterForm.js"
-import { renderComments } from "./renderComments.js";
-import { findAddForm, showAddForm } from "./showAddForm.js";
-import { findComments, getComment } from "./main.js";
+
+import { showAddForm } from "./showAddForm.js";
+import { findComments, } from "./main.js";
 
 
 // логин форма
@@ -64,7 +64,7 @@ export function showLoginForm () {
                      
         })
         .then(() => {
-            
+
             findComments();
             showAddForm();
             
@@ -72,7 +72,7 @@ export function showLoginForm () {
     });
    
 }
-//   showLoginForm(); 
+
 
 
 

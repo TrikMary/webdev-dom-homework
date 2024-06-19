@@ -1,9 +1,9 @@
 import { getCommentFetch } from "./api.js";
-import { checkInputValue } from "./checkInputValue.js";
+
 import { renderComments } from "./renderComments.js";
-import { postComment } from "./postComment.js";
+
 import { showLoginForm } from "./login.js";
-import { showAddForm } from "./showAddForm.js";
+
 
 
 

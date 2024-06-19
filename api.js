@@ -1,6 +1,5 @@
 
 const baseApiUrl = "https://wedev-api.sky.pro/api/v2/:mariya-shanina";
-// const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
 const authUrl = "https://wedev-api.sky.pro/api/user/login";
 const regUrl = "https://wedev-api.sky.pro/api/user"
 

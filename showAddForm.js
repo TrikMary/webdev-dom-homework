@@ -1,6 +1,6 @@
 import { userName } from "./api.js"
-import { postComment } from "./postComment.js"
-import { checkInputValue, shortCheckInputValue } from "./checkInputValue.js"
+
+import { shortCheckInputValue } from "./checkInputValue.js"
 
 
 export const hideAddForm = () => {
