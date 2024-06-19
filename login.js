@@ -1,13 +1,16 @@
-import { getToken, loginFetch, setUserName, setToken, token, userName } from "./api.js";
+import { loginFetch, setUserName, setToken, token, userName } from "./api.js";
 import { showRegisterForm } from "./showRegisterForm.js"
-import { renderComments } from "./renderComments.js";
-import { findAddForm, showAddForm } from "./showAddForm.js";
-import { findComments, getComment } from "./main.js";
+
+import { showAddForm } from "./showAddForm.js";
+import { findComments, } from "./main.js";
+
 
 
 // логин форма
 export function showLoginForm () {
     const showLoginFormElement = document.getElementById("customer-form");
+
+
     
     const loginHtml = `            
         <div class="login-form">
@@ -49,30 +52,57 @@ export function showLoginForm () {
     const loginLoginElement = document.getElementById("login-form-login");
     const loginPasswordElement = document.getElementById("login-form-password");
 
-      loginButtonElement.addEventListener("click", () => {
-        loginFetch ({
-              login: loginLoginElement.value,
-              password: loginPasswordElement.value,
-          }).then((responseData) => {
-          
-          console.log(token);
-          console.log(responseData);
-          setUserName(responseData.user.name);
-          console.log(userName);
-          setToken(responseData.user.token);
-          console.log(token);
-                     
-        })
-        .then(() => {
+    //переменные для проверки
+    const logLogin = loginLoginElement;
+    const logPassword = loginPasswordElement;
+                  
+    function loginCheckInputValue () {
+     
+    logLogin.classList.remove("error");
+    logPassword.classList.remove("error");
+    if (!logLogin.value.trim() && !logPassword.value.trim()) {
+    logLogin.classList.add("error");
+    logPassword.classList.add("error");
+    return;
+    } else if (!logLogin.value.trim()) {
+    logLogin.classList.add("error");
+    return;
+    } else if (!logPassword.value.trim()) {
+    logPassword.classList.add("error");
+    return;
+    } else {
+         loginFetch ({
+          login: loginLoginElement.value,
+          password: loginPasswordElement.value,
+        }).then((responseData) => {
             
-            findComments();
-            showAddForm();
-            
-        });
-    });
+            console.log(token);
+            console.log(responseData);
+            setUserName(responseData.user.name);
+            console.log(userName);
+            setToken(responseData.user.token);
+            console.log(token);
+          } )
+      
+                
+      
+      .then(() => {
+
+        findComments();
+        showAddForm();
+        
+      });
+    
+    }
+    }  
+
+  loginButtonElement.addEventListener("click", () => {
+      
+    loginCheckInputValue();
+  });
    
 }
-//   showLoginForm(); 
+
 
 
 
