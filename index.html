@@ -12,13 +12,16 @@
       <ul class="comments">
          <!-- тут будут сама лента комментариев в массиве, JS пропишем отдельно -->
       </ul>
-      <div class="customer-form" id="customer-form"></div>
+      <div class="customer-form" id="customer-form">
+        Чтобы добавить комментарий, <u><span class="show-start-form" id="show-start-form">авторизуйтесь</span></u>
+      </div>
 
       <div class="add-form">
         <input
           type="text"
           class="add-form-name"
           placeholder="Введите ваше имя"
+          readonly
         />
         <textarea
           type="textarea"
@@ -97,6 +100,9 @@
     align-self: center;
     
     
+  }
+  .show-start-form {
+    cursor: pointer;
   }
   .change-form-text {
     text-align: center;

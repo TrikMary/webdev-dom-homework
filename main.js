@@ -2,6 +2,8 @@ import { getCommentFetch } from "./api.js";
 import { checkInputValue } from "./checkInputValue.js";
 import { renderComments } from "./renderComments.js";
 import { postComment } from "./postComment.js";
+import { showLoginForm } from "./login.js";
+
 
 
 document.querySelector(".loaderPost").classList.add("loader");
@@ -9,9 +11,20 @@ document.querySelector(".loaderPost").classList.add("loader");
 
 export let comments = [];
 
+
 export const name = document.querySelector(".add-form-name");
 export const text = document.querySelector(".add-form-text");
 export const list = document.querySelector(".comments");
+
+
+// первая загрузка формы при ссылке с главной странички
+const showStartFormElement = document.getElementById("show-start-form");
+  showStartFormElement.addEventListener("click", () => {
+    document.querySelector(".comments").classList.add("invisible");
+    showLoginForm();
+  })
+
+
 
 
 export const getComment = () => {
@@ -53,45 +66,7 @@ addButton.addEventListener("click", () => {
     checkInputValue({name, text, postComment})
 });
 
-export const showLoginForm = () => {
-  const showLoginFormElement = document.getElementById("customer-form");
-    
-  const loginHtml = `            
-      <div class="login-form">
-          <h1>Форма ввода </h1>
-          <input
-          type="text"
-          class="login-form-input login-form-login" id="login-form-input"
-          placeholder="Введите логин"
-          />
-
-          <input
-          type="text"
-          class="login-form-input login-form-password" id="login-form-password"
-          placeholder="Введите пароль"
-          />
-                  
-          <div class="login-form-row">
-          <div>
-          <button class="login-form-button" id="login-form-button">Войти</button>
-          </div>
-          <div>
-          <h2 class="change-form-text" id="change-form">Зарегистрироваться</h2> 
-          </div>
-          </div>
-      </div>
-      
-      
-      </div>
-      `;
-    showLoginFormElement.innerHTML = loginHtml;
-
-    const changeLoginToReg = document.getElementById("change-form");
-    changeLoginToReg.addEventListener("click", () => {
-      showRegisterForm();
-    })
-}
-showLoginForm();  
+ 
 
 export const showRegisterForm = () => {
   const showRegisterFormElement = document.getElementById("customer-form");
@@ -134,6 +109,7 @@ export const showRegisterForm = () => {
       showLoginForm();
     })
 }
+
 
 
 

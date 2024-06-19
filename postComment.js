@@ -1,5 +1,5 @@
 import { hideInputForm, showInputForm } from "./visibleInputForm.js";
-import { postCommentFetch } from "./api.js";
+import { postCommentFetch, userName } from "./api.js";
 import { getComment, text, name } from "./main.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
  
@@ -9,7 +9,7 @@ export const postComment = () => {
     
     postCommentFetch ( {
         text: sanitizeHtml(text.value), 
-        name: sanitizeHtml(name.value),
+        name: userName.value,
     }).then((responseData) => {
         // Очищаем поля ввода от прошлых вводов
         name.value = "";
