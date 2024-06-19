@@ -3,13 +3,15 @@ import { checkInputValue } from "./checkInputValue.js";
 import { renderComments } from "./renderComments.js";
 import { postComment } from "./postComment.js";
 import { showLoginForm } from "./login.js";
+import { showAddForm } from "./showAddForm.js";
 
 
 
-document.querySelector(".loaderPost").classList.add("loader");
-    
+// document.querySelector(".loaderPost").classList.add("loader");
+
 
 export let comments = [];
+
 
 
 export const name = document.querySelector(".add-form-name");
@@ -58,6 +60,7 @@ export const getComment = () => {
 }
 
 getComment ();
+showAddForm();
 
 
 const addButton = document.querySelector(".add-form-button");
