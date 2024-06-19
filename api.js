@@ -1,10 +1,10 @@
 
-
-const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
+const baseApiUrl = "https://wedev-api.sky.pro/api/v2/:mariya-shanina";
+// const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
 
 export function getCommentFetch () {
 
-    return fetch(baseApiUrl,
+    return fetch(`${baseApiUrl} /comments`,
         {
           method: "GET",
         })
@@ -19,9 +19,30 @@ export function getCommentFetch () {
         })
 }
 
+export function loginAuth ({ login, password }) {
+  return fetch(authUrl, {
+    method: "POST",
+    body: JSON.stringify({
+      login: login, 
+      password: password,
+    })
+  })
+ 
+  .then((response) => {
+    
+    if (response.status === 400) {
+      throw new Error ("неверный логин/пароль")
+    } 
+      return response.json();
+  }).catch((error) => {
+    alert ("Вы ввели неправильный логин/пароль, попробуйте снова");
+    return;
+  })
+}
+
 export function postCommentFetch ( {text, name}) {
 
-    return fetch(baseApiUrl, {
+    return fetch(`${baseApiUrl} /comments`, {
         method: "POST",
         body: JSON.stringify({
           text: text, 
