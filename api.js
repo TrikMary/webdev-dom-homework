@@ -2,6 +2,19 @@
 const baseApiUrl = "https://wedev-api.sky.pro/api/v2/:mariya-shanina";
 // const baseApiUrl = "https://wedev-api.sky.pro/api/v1/:mariya-shanina/comments";
 
+let token = null;
+
+//проверка на авторизацию, если вернул не null значит авторизован
+// если null то не авторизован
+export const getToken = () => {
+              return token;
+            }
+
+export const setToken = (newToken) => {
+              token = newToken;
+            }
+
+
 export function getCommentFetch () {
 
     return fetch(`${baseApiUrl} /comments`,

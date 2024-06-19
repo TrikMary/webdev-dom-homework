@@ -53,4 +53,88 @@ addButton.addEventListener("click", () => {
     checkInputValue({name, text, postComment})
 });
 
+export const showLoginForm = () => {
+  const showLoginFormElement = document.getElementById("customer-form");
+    
+  const loginHtml = `            
+      <div class="login-form">
+          <h1>Форма ввода </h1>
+          <input
+          type="text"
+          class="login-form-input login-form-login" id="login-form-input"
+          placeholder="Введите логин"
+          />
+
+          <input
+          type="text"
+          class="login-form-input login-form-password" id="login-form-password"
+          placeholder="Введите пароль"
+          />
+                  
+          <div class="login-form-row">
+          <div>
+          <button class="login-form-button" id="login-form-button">Войти</button>
+          </div>
+          <div>
+          <h2 class="change-form-text" id="change-form">Зарегистрироваться</h2> 
+          </div>
+          </div>
+      </div>
+      
+      
+      </div>
+      `;
+    showLoginFormElement.innerHTML = loginHtml;
+
+    const changeLoginToReg = document.getElementById("change-form");
+    changeLoginToReg.addEventListener("click", () => {
+      showRegisterForm();
+    })
+}
+showLoginForm();  
+
+export const showRegisterForm = () => {
+  const showRegisterFormElement = document.getElementById("customer-form");
+
+  const registerHtml = `
+  <div class="login-form">
+  <h1>Форма ввода </h1>
+  <input
+    type="text"
+    class="login-form-input login-form-login"
+    placeholder="Введите логин"
+  />
+
+  <input
+    type="text"
+    class="login-form-input register-form-name"
+    placeholder="Введите имя"
+  />
+
+  <input
+    type="text"
+    class="login-form-input login-form-password"
+    placeholder="Введите пароль"
+  />
+            
+  <div class="login-form-row">
+   <div>
+        <button class="register-form-button" >Зарегистрироваться</button>
+    </div>
+    <div>
+    <h2 class="change-form-text" id="change-form">Войти</h2> 
+    </div>
+  </div>
+  
+  `;
+  showRegisterFormElement.innerHTML = registerHtml;
+
+  const changeLoginToReg = document.getElementById("change-form");
+    changeLoginToReg.addEventListener("click", () => {
+      showLoginForm();
+    })
+}
+
+
+
 console.log("It works!");

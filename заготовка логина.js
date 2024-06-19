@@ -6,33 +6,7 @@
 
 
 
-// export const showLoginPage = () => {
-//   const showLoginPageElement = document.getElementById("customer-form");
-//   const loginHtml = `
-//     <div class="container">
-            
-//     <div class="login-form">
-//         <input
-//         type="text"
-//         class="login-form-input login-form-login" id="login-form-input"
-//         placeholder="Введите логин"
-//         />
 
-//         <input
-//         type="text"
-//         class="login-form-input login-form-password" id="login-form-password"
-//         placeholder="Введите пароль"
-//         />
-                
-//         <div class="login-form-row">
-//         <button class="login-form-button" id="login-form-button">Войти</button>
-//         </div>
-//     </div>
-    
-    
-//     </div>
-//     `;
-//     showLoginPageElement.innerHTML = loginHtml;
 
 //     const loginButtonElement = document.getElementById("login-form-button");
 //     const loginInputElement = document.getElementById("login-form-input");
