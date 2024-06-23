@@ -1,5 +1,4 @@
 import { comments } from "./main.js";
-
 // import { text } from "./showAddForm.js";
 
 export function initQuoteListener ({text}) {

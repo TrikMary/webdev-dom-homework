@@ -114,4 +114,3 @@ export function registerFetch ({login, name, password}) {
     return response.json();
   })
 }
-

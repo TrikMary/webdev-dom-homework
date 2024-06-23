@@ -5,7 +5,7 @@ import { list } from "./main.js";
 
 
 
-export const renderComments = ({ idComment }) => {
+export const renderComments = () => {
     list.innerHTML = comments.map((comment, index) => {
       return `
       <li class="comment" data-index="${index}">
@@ -30,8 +30,16 @@ export const renderComments = ({ idComment }) => {
       `   
         
     }).join("");
-        
-    initLikesListeners ({idComment});
+
+
+    // app.innerHTML = ` 
+    // <ul class="comments">
+    // ${commentsHtml}
+    // </ul>
+    // ${token ? formHtml : authHtml}
+  
+      
+    initLikesListeners ();
   
     initQuoteListener ();
   
