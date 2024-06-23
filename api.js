@@ -60,8 +60,9 @@ export function loginFetch ({ login, password }) {
         return;
       } else { 
         alert ("Что-то пошло не так");
-        return;
-      } 
+      }
+      
+    return;
   })
 }
 
@@ -108,7 +109,8 @@ export function registerFetch ({login, name, password}) {
     
     if (response.status === 400) {
       throw new Error ("400я такой пользователь уже существует")
-    }   
+    } 
+    
     return response.json();
   })
 }

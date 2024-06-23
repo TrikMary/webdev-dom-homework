@@ -1,11 +1,11 @@
 import { initLikesListeners } from "./initLikesListeners.js";
 import { initQuoteListener } from "./initQuoteListener.js";
-import { comments } from "./main.js";
+import { comments} from "./main.js";
 import { list } from "./main.js";
 
 
 
-export const renderComments = () => {
+export const renderComments = ({ idComment }) => {
     list.innerHTML = comments.map((comment, index) => {
       return `
       <li class="comment" data-index="${index}">
@@ -31,7 +31,7 @@ export const renderComments = () => {
         
     }).join("");
         
-    initLikesListeners ();
+    initLikesListeners ({idComment});
   
     initQuoteListener ();
   

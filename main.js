@@ -42,15 +42,16 @@ export const getComment = () => {
           name: comment.author.name,
           date: new Date(comment.date),
           text: comment.text,
+          idComment: comment.id,
           likes: comment.likes,
           isLiked: comment.isLiked,
       }
     });
-
+    
     comments = appComments;
     document.querySelector(".loaderFirst").classList.add("loader");
           
-    renderComments();
+    renderComments({ idComment });
 
   }).catch((error) => {
       if (error.message === "500я проблема сервера") {
