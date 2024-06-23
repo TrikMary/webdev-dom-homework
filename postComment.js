@@ -4,7 +4,7 @@ import { getComment} from "./main.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
  
 
-export const postComment = ({text}) => {
+export const postComment = ({ text }) => {
     hideInputForm();
     
     postCommentFetch ( {

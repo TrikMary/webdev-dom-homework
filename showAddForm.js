@@ -51,11 +51,10 @@ export const showAddForm = () => {
         const text = document.querySelector(".add-form-text");
         const addButton = document.querySelector(".add-form-button");
         addButton.addEventListener("click", () => {
-            shortCheckInputValue({text});
+            shortCheckInputValue({ text });
             });
 
             initQuoteListener ({ text });
 };
-
 
 

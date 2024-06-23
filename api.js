@@ -19,6 +19,7 @@ export const setUserName = (newUserName) => {
               userName = newUserName;
 }
 
+export let id;
 
 
 
@@ -114,3 +115,39 @@ export function registerFetch ({login, name, password}) {
     return response.json();
   })
 }
+
+
+// let idComment = comments.comment.id;
+// export let getIdComment = () => {
+//   return idComment;
+// }
+
+export function likeFetch ({id}) {
+    console.log(id);
+  return fetch(`${baseApiUrl} /comments/${id}/toggle-like`, {
+      method: "POST",
+      
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    
+    }).then((response) => {
+      
+      console.log(response);
+      return response.json();
+      
+    })
+  }
+   
+    // .then((response) => {
+      
+    //   if (response.status === 400) {
+    //     throw new Error ("400я проблема с полями")
+    //   } 
+    //   if (response.status === 500) {
+    //     throw new Error ("500я проблема с сервером")
+    //   }
+    //   return response.json();
+    // })
+// }
+

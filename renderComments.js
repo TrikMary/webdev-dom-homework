@@ -21,10 +21,10 @@ export const renderComments = () => {
         <div class="comment-footer">
           <div class="likes">
             <span class="likes-counter">${comment.likes}</span>
-            <button data-index="${index}" class="like-button ${
-              comment.isLiked ? "-active-like" : ""
-          }"></button>
-            </div>
+            <button data-like="${comment.likes}" data-id="${comment.id}" class="like-button 
+            ${comment.isLiked ? "-active-like" : "like-button"} ">
+            </button>
+          </div>
           </div>
         </li>
       `   
@@ -41,6 +41,6 @@ export const renderComments = () => {
       
     initLikesListeners ();
   
-    initQuoteListener ();
+    initQuoteListener ( );
   
   }
