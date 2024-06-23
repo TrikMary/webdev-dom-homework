@@ -55,14 +55,8 @@ export function shortCheckInputValue ( {text} ) {
      if (!text.value.trim()) {
      text.classList.add("error");
      return;
-     } else if (!name.value.trim()) {
-     name.classList.add("error");
-     return;
-     } else if (!text.value.trim()) {
-     text.classList.add("error");
-     return;
      } else {      
-     postComment();
+     postComment({text});
      }
      
 }    

@@ -93,8 +93,7 @@ export function showLoginForm () {
         
       });
     
-    }
-    }  
+    }; }  
 
   loginButtonElement.addEventListener("click", () => {
       

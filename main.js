@@ -51,7 +51,7 @@ export const getComment = () => {
     comments = appComments;
     document.querySelector(".loaderFirst").classList.add("loader");
           
-    renderComments({ idComment });
+    renderComments();
 
   }).catch((error) => {
       if (error.message === "500я проблема сервера") {

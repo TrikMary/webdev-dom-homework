@@ -4,7 +4,7 @@ import { initQuoteListener } from "./initQuoteListener.js"
 import { shortCheckInputValue } from "./checkInputValue.js"
 
 
-import { shortCheckInputValue } from "./checkInputValue.js"
+
 
 
 export const hideAddForm = () => {
