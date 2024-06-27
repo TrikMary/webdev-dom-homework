@@ -2,6 +2,7 @@ import { hideInputForm, showInputForm } from "./visibleInputForm.js";
 import { postCommentFetch, userName } from "./api.js";
 import { getComment} from "./main.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
+import { renderComments } from "./renderComments.js"
  
 
 export const postComment = ({ text }) => {
@@ -34,5 +35,7 @@ export const postComment = ({ text }) => {
         
     })
     .finally (() => showInputForm());
+
+    
 
 }

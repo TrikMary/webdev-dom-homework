@@ -14,7 +14,7 @@ export const renderComments = () => {
           <div>${comment.date.toLocaleDateString()} ${comment.date.toLocaleTimeString()}</div>
         </div>
         <div class="comment-body">
-          <div class="comment-text">
+          <div class="comment-text" data-index="${index}">
             ${comment.text}
           </div>
         </div>
@@ -41,6 +41,6 @@ export const renderComments = () => {
       
     initLikesListeners ();
   
-    initQuoteListener ( );
+    initQuoteListener ( { text } );
   
   }

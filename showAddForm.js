@@ -7,6 +7,7 @@ import { shortCheckInputValue } from "./checkInputValue.js"
 
 
 
+
 export const hideAddForm = () => {
             document.getElementById("add-form").classList.add("invisible")
 }
@@ -54,7 +55,9 @@ export const showAddForm = () => {
             shortCheckInputValue({ text });
             });
 
-            initQuoteListener ({ text });
+            initQuoteListener ( { text });
+
+            
 };
 
 

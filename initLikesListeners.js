@@ -14,12 +14,12 @@ export function initLikesListeners () {
         likeFetch({id}).then((responseData) => {
           console.log(responseData);
           
-          // if (responseData.result.isLiked === true ) {
-          //   likeButtonElement.classList.add("-active-like");
-          // }
-          //  else {
-          //   likeButtonElement.classList.remove("-active-like")
-          //  }
+          if (responseData.result.isLiked === true ) {
+            likeButtonElement.classList.add("-active-like");
+          }
+           else {
+            likeButtonElement.classList.remove("-active-like")
+           }
             
         
         }).then(() => {
