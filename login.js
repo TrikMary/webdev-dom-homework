@@ -6,6 +6,7 @@ import { findComments, } from "./main.js";
 
 
 
+
 // логин форма
 export function showLoginForm () {
     const showLoginFormElement = document.getElementById("customer-form");
@@ -87,7 +88,7 @@ export function showLoginForm () {
                 
       
       .then(() => {
-
+        
         findComments();
         showAddForm();
         

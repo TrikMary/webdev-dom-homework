@@ -2,6 +2,17 @@ import { postComment } from "./postComment.js";
 
 // наша проверка полей ввода
 
+// короткая проверка комментария
+export function shortCheckInputValue ( {text} ) {
+     text.classList.remove("error");
+     if (!text.value.trim()) {
+     text.classList.add("error");
+     return;
+     } else {      
+     postComment({text});
+     }
+     
+}    
 
 // проверка при регистрации
 // export function registerCheckInputValue ( {regName, regLogin, regPassword} ) {
@@ -49,14 +60,3 @@ import { postComment } from "./postComment.js";
 //      }
 // }     
 
-// короткая проверка комментария
-export function shortCheckInputValue ( {text} ) {
-     text.classList.remove("error");
-     if (!text.value.trim()) {
-     text.classList.add("error");
-     return;
-     } else {      
-     postComment({text});
-     }
-     
-}    

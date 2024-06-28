@@ -8,9 +8,10 @@ export function sanitizeHtml (stringHtml) {
     .replaceAll('"', "quot;")
     .replaceAll("%BEGIN_QUOTE", "<div class='quote'>")
     .replaceAll("END_QUOTE%", "</div>");
-}; 
+}
 
-// export function sanitizeName ({ userName }) {
+// export function sanitizeName () {
+//   setUserName();
 //   return userName.value.replaceAll("&", "&amp;")
 //     .replaceAll("<", "&lt;")
 //     .replaceAll(">", "&gt;")
