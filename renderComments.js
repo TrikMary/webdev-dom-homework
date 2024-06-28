@@ -24,7 +24,7 @@ export const renderComments = () => {
           <div class="likes">
             <span class="likes-counter">${comment.likes}</span>
             <button data-like="${comment.likes}" data-id="${comment.id}" class="like-button 
-            
+            ${comment.isLiked ? "-active-like" : "like-button"}
             ">
             </button>
           </div>
@@ -35,7 +35,7 @@ export const renderComments = () => {
     }).join("");
 
 
-    // ${comment.isLiked ? "-active-like" : "like-button"} 
+     
 
     // app.innerHTML = ` 
     // <ul class="comments">
