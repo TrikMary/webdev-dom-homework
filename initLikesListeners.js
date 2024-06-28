@@ -14,6 +14,8 @@ export function initLikesListeners () {
         likeFetch({id}).then((responseData) => {
           console.log(responseData);
           
+          //// Может я что-то тут неправильно обрабатываю?
+
           if (responseData.result.isLiked === true ) {
             likeButtonElement.classList.add("-active-like");
           }
