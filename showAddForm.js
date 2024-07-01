@@ -26,7 +26,7 @@ export const showAddForm = () => {
         <input
             type="text"
             class="add-form-name"            
-            value = "${sanitizeHtml(userName)}"
+            value = "${userName}"
             readonly
         />
         <textarea
