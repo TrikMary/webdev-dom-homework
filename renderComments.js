@@ -1,7 +1,7 @@
 import { initLikesListeners } from "./initLikesListeners.js";
-import { initQuoteListener } from "./initQuoteListener.js";
-import { comments } from "./main.js";
+import { comments} from "./main.js";
 import { list } from "./main.js";
+
 
 
 
@@ -14,26 +14,46 @@ export const renderComments = () => {
           <div>${comment.date.toLocaleDateString()} ${comment.date.toLocaleTimeString()}</div>
         </div>
         <div class="comment-body">
-          <div class="comment-text">
+          <div class="comment-text" data-index="${index}">
             ${comment.text}
           </div>
         </div>
         <div class="comment-footer">
           <div class="likes">
             <span class="likes-counter">${comment.likes}</span>
-            <button data-index="${index}" class="like-button ${
-              comment.isLiked ? "-active-like" : ""
-          }"></button>
-            </div>
+            <button data-like="${comment.likes}" data-id="${comment.id}" class="like-button 
+            ${comment.isLiked ? "-active-like" : "like-button"}
+            ">
+            </button>
+          </div>
           </div>
         </li>
       `   
         
     }).join("");
+
+
+     
+   
   
       
-    initLikesListeners ();
-  
-    initQuoteListener ();
-  
+    initLikesListeners (); 
+
+    const commentElement = document.querySelectorAll(".comment");
+
+    const quoteListener = () => {
+      for (let comment of commentElement) {
+        
+        comment.addEventListener("click", () => {
+        const quoteText = comments[comment.dataset.index];
+        const value = `%BEGIN_QUOTE > ${quoteText.text}END_QUOTE% ${quoteText.name}`;
+
+        const inputText = document.querySelector(".add-form-text");
+        inputText.value = value;
+      });
+    };
   }
+ 
+  quoteListener();
+
+}
