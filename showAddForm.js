@@ -1,17 +1,8 @@
 
 import { userName } from "./api.js"
-// import {  quoteListener } from "./initQuoteListener.js"
-
 import { shortCheckInputValue } from "./checkInputValue.js"
 import { renderComments } from "./renderComments.js"
-import { initLikesListeners } from "./initLikesListeners.js"
-// import { comments } from "./main.js"
-
-
-
-
-
-
+import { sanitizeHtml } from "./sanitizeHtml.js"
 
 
 
@@ -25,10 +16,9 @@ export const findAddForm = () => {
 
 export const showAddForm = () => {
     
-    
     const showAddFormElement = document.getElementById("customer-form");
 
-
+    
         
     const addFormHtml = `
         
@@ -36,7 +26,7 @@ export const showAddForm = () => {
         <input
             type="text"
             class="add-form-name"            
-            value = "${userName}"
+            value = "${sanitizeHtml(userName)}"
             readonly
         />
         <textarea
@@ -56,7 +46,7 @@ export const showAddForm = () => {
 
     showAddFormElement.innerHTML = addFormHtml;
     
-
+ 
     const text = document.querySelector(".add-form-text");
     const addButton = document.querySelector(".add-form-button");
 
@@ -64,33 +54,9 @@ export const showAddForm = () => {
         shortCheckInputValue({ text });
     });
     
-    // const answer = () => {
-    // for (const comment of document.querySelectorAll(".comment")) {
-        
-    //     comment.addEventListener("click", () => {
-    //       console.log("цитатка");
-    //     initQuoteListener ( { text, comment });
-    //     });
-  
-      
-    
-    // }
-    // }
     
   renderComments();
-  initLikesListeners();
-//   answer();
-
-//  чиним
-//   quoteListener( { text });
-        
-      
-        
-       
-    
-    
-    
-    
+  
 }
 
 

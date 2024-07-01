@@ -13,9 +13,6 @@ import { showLoginForm } from "./login.js";
 export let comments = [];
 
 
-
-// export const name = document.querySelector(".add-form-name");
-// export const text = document.querySelector(".add-form-text");
 export const list = document.querySelector(".comments");
 
 
@@ -67,16 +64,6 @@ export const getComment = () => {
 }
 
 getComment ();
-
-
-
-
-
- 
-
-
-
-
 
 
 console.log("It works!");

@@ -28,6 +28,9 @@ export function getCommentFetch () {
     return fetch(`${baseApiUrl} /comments`,
         {
           method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          }
         })
         
         .then((response) => {
@@ -116,12 +119,6 @@ export function registerFetch ({login, name, password}) {
   })
 }
 
-
-// let idComment = comments.comment.id;
-// export let getIdComment = () => {
-//   return idComment;
-// }
-
 export function likeFetch ({id}) {
     console.log(id);
   return fetch(`${baseApiUrl} /comments/${id}/toggle-like`, {
@@ -139,15 +136,3 @@ export function likeFetch ({id}) {
     })
   }
    
-    // .then((response) => {
-      
-    //   if (response.status === 400) {
-    //     throw new Error ("400я проблема с полями")
-    //   } 
-    //   if (response.status === 500) {
-    //     throw new Error ("500я проблема с сервером")
-    //   }
-    //   return response.json();
-    // })
-// }
-

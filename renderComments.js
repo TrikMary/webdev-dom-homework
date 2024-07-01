@@ -1,9 +1,7 @@
 import { initLikesListeners } from "./initLikesListeners.js";
-// import { quoteListener } from "./initQuoteListener.js";
-// import { initQuoteListener } from "showAddForm.js";
 import { comments} from "./main.js";
 import { list } from "./main.js";
-// import { showAddForm } from "./showAddForm.js";
+
 
 
 
@@ -36,31 +34,10 @@ export const renderComments = () => {
 
 
      
-
-    // app.innerHTML = ` 
-    // <ul class="comments">
-    // ${commentsHtml}
-    // </ul>
-    // ${token ? formHtml : authHtml}
+   
   
       
     initLikesListeners (); 
-
-
-    // *************************
-    // TODO: надо как-то заставить цитату работать и тут в том числе,
-    // но я не понимаю как передать переменные ей тут, но взятые из формы ввода комментария
-
-    //*************************** */
-    // quoteListener ( {text});
-      // const answer = () => {
-    // for (const comment of document.querySelectorAll(".comment")) {
-        
-    //     comment.addEventListener("click", () => {
-    //       console.log("цитатка");
-    //     initQuoteListener ( { text, comment });
-    //     });
-    // чиним
 
     const commentElement = document.querySelectorAll(".comment");
 
@@ -77,10 +54,6 @@ export const renderComments = () => {
     };
   }
  
-// чиним
-// }
-//     })
-
-    quoteListener();
+  quoteListener();
 
 }
