@@ -1,6 +1,6 @@
 
 import { userName } from "./api.js"
-import {  quoteListener } from "./initQuoteListener.js"
+// import {  quoteListener } from "./initQuoteListener.js"
 
 import { shortCheckInputValue } from "./checkInputValue.js"
 import { renderComments } from "./renderComments.js"
@@ -80,7 +80,9 @@ export const showAddForm = () => {
   renderComments();
   initLikesListeners();
 //   answer();
-  quoteListener( { text });
+
+//  чиним
+//   quoteListener( { text });
         
       
         

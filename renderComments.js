@@ -1,5 +1,5 @@
 import { initLikesListeners } from "./initLikesListeners.js";
-import { quoteListener } from "./initQuoteListener.js";
+// import { quoteListener } from "./initQuoteListener.js";
 // import { initQuoteListener } from "showAddForm.js";
 import { comments} from "./main.js";
 import { list } from "./main.js";
@@ -53,7 +53,34 @@ export const renderComments = () => {
 
     //*************************** */
     // quoteListener ( {text});
-      
-    
+      // const answer = () => {
+    // for (const comment of document.querySelectorAll(".comment")) {
+        
+    //     comment.addEventListener("click", () => {
+    //       console.log("цитатка");
+    //     initQuoteListener ( { text, comment });
+    //     });
+    // чиним
+
+    const commentElement = document.querySelectorAll(".comment");
+
+    const quoteListener = () => {
+      for (let comment of commentElement) {
+        
+        comment.addEventListener("click", () => {
+        const quoteText = comments[comment.dataset.index];
+        const value = `%BEGIN_QUOTE > ${quoteText.text}END_QUOTE% ${quoteText.name}`;
+
+        const inputText = document.querySelector(".add-form-text");
+        inputText.value = value;
+      });
+    };
+  }
+ 
+// чиним
+// }
+//     })
+
+    quoteListener();
 
 }
