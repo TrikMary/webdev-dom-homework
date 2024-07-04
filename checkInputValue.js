@@ -3,7 +3,7 @@ import { postComment } from "./postComment.js";
 // наша проверка полей ввода
 
 // короткая проверка комментария
-export function shortCheckInputValue ( {text} ) {
+export function shortCheckInputValue ( { text } ) {
      text.classList.remove("error");
      if (!text.value.trim()) {
      text.classList.add("error");

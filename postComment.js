@@ -10,7 +10,7 @@ export const postComment = ({ text }) => {
     
     postCommentFetch ( {
         text: sanitizeHtml(text.value), 
-        name: userName.value,
+        name: userName,
         
     }).then((responseData) => {
         // Очищаем поля ввода от прошлых вводов

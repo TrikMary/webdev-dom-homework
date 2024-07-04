@@ -2,7 +2,8 @@
 import { userName } from "./api.js"
 import { shortCheckInputValue } from "./checkInputValue.js"
 import { renderComments } from "./renderComments.js"
-import { sanitizeHtml } from "./sanitizeHtml.js"
+
+
 
 
 

@@ -1,7 +1,7 @@
 
 import { likeFetch } from "./api.js";
 import { getComment } from "./main.js";
-import { renderComments } from "./renderComments.js";
+
 
 export function initLikesListeners () {
     const likeButtonsElements = document.querySelectorAll(".like-button");

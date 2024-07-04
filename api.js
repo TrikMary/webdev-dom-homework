@@ -15,9 +15,13 @@ export const setToken = (newToken) => {
             }
 
 export let userName;
+export const getUserName = () => {
+              return userName;
+            }
 export const setUserName = (newUserName) => {
               userName = newUserName;
-}
+            }
+
 
 export let id;
 

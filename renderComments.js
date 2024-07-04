@@ -1,6 +1,8 @@
 import { initLikesListeners } from "./initLikesListeners.js";
 import { comments} from "./main.js";
 import { list } from "./main.js";
+import { sanitizeHtml } from "./sanitizeHtml.js";
+
 
 
 
@@ -10,7 +12,7 @@ export const renderComments = () => {
       return `
       <li class="comment" data-index="${index}">
         <div class="comment-header">
-          <div>${comment.name}</div>
+          <div>${sanitizeHtml(comment.name)}</div>
           <div>${comment.date.toLocaleDateString()} ${comment.date.toLocaleTimeString()}</div>
         </div>
         <div class="comment-body">
@@ -40,7 +42,7 @@ export const renderComments = () => {
     initLikesListeners (); 
 
     const commentElement = document.querySelectorAll(".comment");
-
+    
     const quoteListener = () => {
       for (let comment of commentElement) {
         
