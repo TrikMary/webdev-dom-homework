@@ -1,3 +1,4 @@
+import { getToken, token } from "./api.js";
 import { initLikesListeners } from "./initLikesListeners.js";
 import { comments} from "./main.js";
 import { list } from "./main.js";
@@ -42,8 +43,25 @@ export const renderComments = () => {
     initLikesListeners (); 
 
     const commentElement = document.querySelectorAll(".comment");
+
+
+    // Реализуем цитату только для авторизованных пользователей
+
+    getToken();
+    console.log("вызвали токен в комментах")
+    console.log(token);
     
-    const quoteListener = () => {
+
+    // Если есть токен, то  работает цитата
+    // используем логический оператор: если в токене ничего нет,
+    // то вычисления дальше не пойдут
+    // нет токена => нет клика
+    token && quoteListener(); 
+    
+    
+    function quoteListener () {
+      
+     
       for (let comment of commentElement) {
         
         comment.addEventListener("click", () => {
@@ -56,6 +74,6 @@ export const renderComments = () => {
     };
   }
  
-  quoteListener();
+  
 
 }
