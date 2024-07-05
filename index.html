@@ -7,33 +7,19 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container" id="app">
       <div class="loaderFirst">Комментарии загружаются...</div>
       <ul class="comments">
          <!-- тут будут сама лента комментариев в массиве, JS пропишем отдельно -->
       </ul>
-
-      <div class="add-form">
-        <input
-          type="text"
-          class="add-form-name"
-          placeholder="Введите ваше имя"
-        />
-        <textarea
-          type="textarea"
-          class="add-form-text"
-          placeholder="Введите ваш коментарий"
-          rows="4"
-        ></textarea>
-        <div class="add-form-row">
-          <button class="add-form-button" >Написать</button>
-        </div>
+      <div class="customer-form" id="customer-form">
+        Чтобы добавить комментарий, <u><span class="show-start-form" id="show-start-form">авторизуйтесь</span></u>
+        <div class="add-form invisible" id="add-form" >     
+        
       </div>
-      <div class="loaderPost"> 
-        <br> Коментарий добавляется...
       </div>
       
-    </div>
+      
   </body>
 
 <!-- Начала писать код -->
@@ -52,9 +38,73 @@
       display: none;
     }
       
+    /* // стиля для новых форм */
+  
+  .login-form {
+      width: 596px;
+      box-sizing: border-box;
+      background: radial-gradient(
+        75.42% 75.42% at 50% 42.37%,
+        rgba(53, 53, 53, 0) 22.92%,
+        #7334ea 100%
+      );
+      filter: drop-shadow(0px 20px 67px rgba(0, 0, 0, 0.08));
+      border-radius: 20px;        
+  }
+
+  .login-form {
+      padding: 20px;
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      
+      gap: 24px;
+  }
+
+  .login-form-input {
+    font-size: 16px;
+    font-family: Helvetica;
+    border-radius: 8px;
+    border: none;
+    /* width: 300px; */
+    padding: 11px 22px;
+  }
+
+  .login-form-button,
+  .register-form-button {
+    margin-top: 24px;
+    font-size: 24px;
+    padding: 10px 20px;
+    background-color: #bcec30;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    width: 260px;   
+    align-self: center;
+    
+    
+  }
+  .show-start-form {
+    cursor: pointer;
+  }
+  .change-form-text {
+    text-align: center;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .login-form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-form-button:hover,
+  .register-form-button:hover {
+    opacity: 0.9;
+  }
   </style>
 
-  <script type="module" src="./main.js">
+  <script type="module" src="main.js">
     
   </script>
 </html>

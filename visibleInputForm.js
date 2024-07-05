@@ -11,3 +11,4 @@ export function hideInputForm () {
       document.querySelector(".add-form").classList.add("invisible");
       console.log("прячемся");
       }
+
