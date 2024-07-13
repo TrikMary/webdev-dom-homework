@@ -1,20 +1,24 @@
 import { getToken, token } from "./api.js";
 import { initLikesListeners } from "./initLikesListeners.js";
-import { comments} from "./main.js";
+import { comments } from "./main.js";
 import { list } from "./main.js";
 import { sanitizeHtml } from "./sanitizeHtml.js";
+import { format } from "date-fns";
 
-
-
-
+// {/* <div>${comment.date.toLocaleDateString()} ${comment.date.toLocaleTimeString()}</div> */}
 
 export const renderComments = () => {
-    list.innerHTML = comments.map((comment, index) => {
-      return `
+    list.innerHTML = comments
+        .map((comment, index) => {
+            const createDate = format(
+                new Date(comment.date),
+                "yyyy-MM-dd hh.mm.ss",
+            );
+            return `
       <li class="comment" data-index="${index}">
         <div class="comment-header">
           <div>${sanitizeHtml(comment.name)}</div>
-          <div>${comment.date.toLocaleDateString()} ${comment.date.toLocaleTimeString()}</div>
+          <div>${createDate}</div>
         </div>
         <div class="comment-body">
           <div class="comment-text" data-index="${index}">
@@ -31,49 +35,35 @@ export const renderComments = () => {
           </div>
           </div>
         </li>
-      `   
-        
-    }).join("");
+      `;
+        })
+        .join("");
 
-
-     
-   
-  
-      
-    initLikesListeners (); 
+    initLikesListeners();
 
     const commentElement = document.querySelectorAll(".comment");
-
 
     // Реализуем цитату только для авторизованных пользователей
 
     getToken();
-    console.log("вызвали токен в комментах")
+    console.log("вызвали токен в комментах");
     console.log(token);
-    
 
     // Если есть токен, то  работает цитата
     // используем логический оператор: если в токене ничего нет,
     // то вычисления дальше не пойдут
     // нет токена => нет клика
-    token && quoteListener(); 
-    
-    
-    function quoteListener () {
-      
-     
-      for (let comment of commentElement) {
-        
-        comment.addEventListener("click", () => {
-        const quoteText = comments[comment.dataset.index];
-        const value = `%BEGIN_QUOTE > ${quoteText.text}END_QUOTE% ${quoteText.name}`;
+    token && quoteListener();
 
-        const inputText = document.querySelector(".add-form-text");
-        inputText.value = value;
-      });
-    };
-  }
- 
-  
+    function quoteListener() {
+        for (let comment of commentElement) {
+            comment.addEventListener("click", () => {
+                const quoteText = comments[comment.dataset.index];
+                const value = `%BEGIN_QUOTE > ${quoteText.text}END_QUOTE% ${quoteText.name}`;
 
-}
+                const inputText = document.querySelector(".add-form-text");
+                inputText.value = value;
+            });
+        }
+    }
+};

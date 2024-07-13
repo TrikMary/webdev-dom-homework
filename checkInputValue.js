@@ -3,20 +3,19 @@ import { postComment } from "./postComment.js";
 // наша проверка полей ввода
 
 // короткая проверка комментария
-export function shortCheckInputValue ( { text } ) {
-     text.classList.remove("error");
-     if (!text.value.trim()) {
-     text.classList.add("error");
-     return;
-     } else {      
-     postComment({text});
-     }
-     
-}    
+export function shortCheckInputValue({ text }) {
+    text.classList.remove("error");
+    if (!text.value.trim()) {
+        text.classList.add("error");
+        return;
+    } else {
+        postComment({ text });
+    }
+}
 
 // проверка при регистрации
 // export function registerCheckInputValue ( {regName, regLogin, regPassword} ) {
-     
+
 //      regName.classList.remove("error");
 //      regLogin.classList.remove("error");
 //      regPassword.classList.remove("error")
@@ -36,13 +35,12 @@ export function shortCheckInputValue ( { text } ) {
 //      regPassword.classList.add("error");
 //      return;
 //      }
-     
-// }  
 
+// }
 
 // проверка полей авторизации
 // export function loginCheckInputValue ( { logLogin, logPassword, loginFetch } ) {
-     
+
 //      logLogin.classList.remove("error");
 //      logPassword.classList.remove("error");
 //      if (!logLogin.value.trim() && !logPassword.value.trim()) {
@@ -58,5 +56,4 @@ export function shortCheckInputValue ( { text } ) {
 //      } else {
 //           loginFetch();
 //      }
-// }     
-
+// }
