@@ -1,6 +1,4 @@
-module.exports = {
-    entry: "./main.js",
-    output: {
-        filename: "main.js",
-    },
+export const entry = "./main.js";
+export const output = {
+    filename: "main.js",
 };
