@@ -1,4 +1,6 @@
-export const entry = "./main.js";
-export const output = {
-    filename: "main.js",
+export default {
+    entry: "./main.js",
+    output: {
+        filename: "main.js",
+    },
 };
