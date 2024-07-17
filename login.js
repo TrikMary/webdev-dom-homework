@@ -1,18 +1,13 @@
 import { loginFetch, setUserName, setToken, token, userName } from "./api.js";
-import { showRegisterForm } from "./showRegisterForm.js"
+import { showRegisterForm } from "./showRegisterForm.js";
 
 import { showAddForm } from "./showAddForm.js";
-import { findComments, } from "./main.js";
-
-
-
+import { findComments } from "./main.js";
 
 // логин форма
-export function showLoginForm () {
+export function showLoginForm() {
     const showLoginFormElement = document.getElementById("customer-form");
 
-
-    
     const loginHtml = `            
         <div class="login-form">
             <h1>Форма ввода </h1>
@@ -41,13 +36,13 @@ export function showLoginForm () {
         
         </div>
         `;
-      showLoginFormElement.innerHTML = loginHtml;
-  
-      const changeLoginToReg = document.getElementById("change-form");
-      
-      changeLoginToReg.addEventListener("click", () => {
+    showLoginFormElement.innerHTML = loginHtml;
+
+    const changeLoginToReg = document.getElementById("change-form");
+
+    changeLoginToReg.addEventListener("click", () => {
         showRegisterForm();
-      });
+    });
 
     const loginButtonElement = document.getElementById("login-form-button");
     const loginLoginElement = document.getElementById("login-form-login");
@@ -56,55 +51,42 @@ export function showLoginForm () {
     //переменные для проверки
     const logLogin = loginLoginElement;
     const logPassword = loginPasswordElement;
-                  
-    function loginCheckInputValue () {
-     
-    logLogin.classList.remove("error");
-    logPassword.classList.remove("error");
-    if (!logLogin.value.trim() && !logPassword.value.trim()) {
-    logLogin.classList.add("error");
-    logPassword.classList.add("error");
-    return;
-    } else if (!logLogin.value.trim()) {
-    logLogin.classList.add("error");
-    return;
-    } else if (!logPassword.value.trim()) {
-    logPassword.classList.add("error");
-    return;
-    } else {
-         loginFetch ({
-          login: loginLoginElement.value,
-          password: loginPasswordElement.value,
-        }).then((responseData) => {
-            
-            console.log(token);
-            console.log(responseData);
-            setUserName(responseData.user.name);
-            console.log(userName);
-            setToken(responseData.user.token);
-            console.log(token);
-          } )
-      
-                
-      
-      .then(() => {
-        
-        findComments();
-        showAddForm();
-        
-      });
-    
-    }; }  
 
-  loginButtonElement.addEventListener("click", () => {
-      
-    loginCheckInputValue();
-  });
-   
+    function loginCheckInputValue() {
+        logLogin.classList.remove("error");
+        logPassword.classList.remove("error");
+        if (!logLogin.value.trim() && !logPassword.value.trim()) {
+            logLogin.classList.add("error");
+            logPassword.classList.add("error");
+            return;
+        } else if (!logLogin.value.trim()) {
+            logLogin.classList.add("error");
+            return;
+        } else if (!logPassword.value.trim()) {
+            logPassword.classList.add("error");
+            return;
+        } else {
+            loginFetch({
+                login: loginLoginElement.value,
+                password: loginPasswordElement.value,
+            })
+                .then((responseData) => {
+                    console.log(token);
+                    console.log(responseData);
+                    setUserName(responseData.user.name);
+                    console.log(userName);
+                    setToken(responseData.user.token);
+                    console.log(token);
+                })
+
+                .then(() => {
+                    findComments();
+                    showAddForm();
+                });
+        }
+    }
+
+    loginButtonElement.addEventListener("click", () => {
+        loginCheckInputValue();
+    });
 }
-
-
-
-
-
-

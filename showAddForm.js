@@ -1,26 +1,17 @@
-
-import { userName } from "./api.js"
-import { shortCheckInputValue } from "./checkInputValue.js"
-import { renderComments } from "./renderComments.js"
-
-
-
-
-
+import { userName } from "./api.js";
+import { shortCheckInputValue } from "./checkInputValue.js";
+import { renderComments } from "./renderComments.js";
 
 export const hideAddForm = () => {
-            document.getElementById("add-form").classList.add("invisible")
-}
+    document.getElementById("add-form").classList.add("invisible");
+};
 export const findAddForm = () => {
-    document.getElementById("add-form").classList.remove("invisible")
-}
+    document.getElementById("add-form").classList.remove("invisible");
+};
 
 export const showAddForm = () => {
-    
     const showAddFormElement = document.getElementById("customer-form");
 
-    
-        
     const addFormHtml = `
         
     <div class="add-form" id="add-form" >  
@@ -46,18 +37,13 @@ export const showAddForm = () => {
     `;
 
     showAddFormElement.innerHTML = addFormHtml;
-    
- 
+
     const text = document.querySelector(".add-form-text");
     const addButton = document.querySelector(".add-form-button");
 
     addButton.addEventListener("click", () => {
         shortCheckInputValue({ text });
     });
-    
-    
-  renderComments();
-  
-}
 
-
+    renderComments();
+};
